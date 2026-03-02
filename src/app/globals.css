@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f4f0;
+  --foreground: #000000;
 }
 
 @theme inline {
@@ -14,8 +14,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Keep neubrutalism light/bold regardless of system theme */
+    --background: #f4f4f0;
+    --foreground: #000000;
   }
 }
 

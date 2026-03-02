@@ -27,7 +27,7 @@ export default function ImageUploader({
             reader.onloadend = () => setPreview(reader.result as string);
             reader.readAsDataURL(file);
         },
-        [onImageSelect],
+        [onImageSelect]
     );
 
     const handleDrop = useCallback(
@@ -37,7 +37,7 @@ export default function ImageUploader({
             const file = e.dataTransfer.files[0];
             if (file) handleFile(file);
         },
-        [handleFile],
+        [handleFile]
     );
 
     const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -72,13 +72,11 @@ export default function ImageUploader({
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             className={`
-        relative cursor-pointer rounded-2xl border-2 border-dashed
-        transition-all duration-300 ease-out
-        ${isDragging
-                    ? "border-violet-400 bg-violet-500/10 scale-[1.02]"
-                    : preview
-                        ? "border-white/20 bg-white/5"
-                        : "border-white/10 bg-white/[0.03] hover:border-violet-400/50 hover:bg-white/[0.06]"
+        relative cursor-pointer border-4 border-black bg-white
+        transition-all duration-200 ease-out p-8
+        ${isDragging || preview
+                    ? "shadow-[inset_0_0_0_4px_rgba(0,0,0,1)] bg-purple-100"
+                    : "shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] active:translate-x-2 active:translate-y-2 active:shadow-none"
                 }
       `}
         >
@@ -92,32 +90,36 @@ export default function ImageUploader({
             />
 
             {preview ? (
-                <div className="relative p-4">
+                <div className="relative">
                     <img
                         src={preview}
                         alt="Uploaded preview"
-                        className="mx-auto max-h-64 rounded-xl object-contain"
+                        className="mx-auto max-h-64 border-4 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] object-contain bg-white"
                     />
-                    <p className="mt-3 text-center text-sm text-white/50">
-                        {selectedImage?.name}
-                    </p>
+                    <div className="mt-6 text-center">
+                        <p className="text-sm font-black uppercase tracking-wider text-black border-2 border-black inline-block px-4 py-2 bg-yellow-300 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
+                            {selectedImage?.name}
+                        </p>
+                    </div>
                     <button
                         onClick={handleRemove}
-                        className="absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/60 transition-colors hover:bg-red-500/20 hover:text-red-400"
+                        className="absolute -top-4 -right-4 flex h-10 w-10 items-center justify-center border-2 border-black bg-red-500 text-white shadow-[4px_4px_0_0_rgba(0,0,0,1)] transition-all hover:bg-red-600 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none"
                         aria-label="Remove image"
                     >
-                        ✕
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                     </button>
                 </div>
             ) : (
-                <div className="flex flex-col items-center gap-4 px-8 py-12">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20">
+                <div className="flex flex-col items-center gap-6">
+                    <div className="flex h-20 w-20 items-center justify-center border-4 border-black bg-purple-400 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
                         <svg
-                            className="h-8 w-8 text-violet-400"
+                            className="h-10 w-10 text-black"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
-                            strokeWidth={1.5}
+                            strokeWidth={3}
                         >
                             <path
                                 strokeLinecap="round"
@@ -127,11 +129,10 @@ export default function ImageUploader({
                         </svg>
                     </div>
                     <div className="text-center">
-                        <p className="text-base font-medium text-white/80">
-                            Drop your image here, or{" "}
-                            <span className="text-violet-400">browse</span>
+                        <p className="text-xl font-black uppercase text-black">
+                            Drop image here or <span className="bg-pink-400 text-black border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] px-3 py-1 ml-1 transform inline-block -rotate-2">Browse</span>
                         </p>
-                        <p className="mt-1 text-sm text-white/40">
+                        <p className="mt-4 text-sm font-bold text-black/60 uppercase tracking-widest">
                             PNG, JPG, WEBP up to 10 MB
                         </p>
                     </div>

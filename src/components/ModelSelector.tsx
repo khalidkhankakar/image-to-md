@@ -11,14 +11,14 @@ const models = [
         name: "Gemini",
         description: "Google Gemini 2.0 Flash",
         icon: "✦",
-        gradient: "from-blue-500 to-cyan-400",
+        bg: "bg-blue-400",
     },
     {
         id: "groq",
         name: "Groq",
         description: "Llama 4 Scout via Groq",
         icon: "⚡",
-        gradient: "from-orange-500 to-amber-400",
+        bg: "bg-orange-400",
     },
 ];
 
@@ -27,7 +27,7 @@ export default function ModelSelector({
     onModelChange,
 }: ModelSelectorProps) {
     return (
-        <div id="model-selector" className="flex gap-3">
+        <div id="model-selector" className="flex flex-col sm:flex-row gap-6">
             {models.map((m) => {
                 const isActive = model === m.id;
                 return (
@@ -36,31 +36,27 @@ export default function ModelSelector({
                         id={`model-${m.id}`}
                         onClick={() => onModelChange(m.id)}
                         className={`
-              group flex flex-1 items-center gap-3 rounded-xl border px-4 py-3
-              transition-all duration-300 ease-out
+              group flex flex-1 items-center gap-4 border-4 border-black px-5 py-4
+              transition-all duration-200 ease-out
               ${isActive
-                                ? "border-violet-400/50 bg-violet-500/10 shadow-lg shadow-violet-500/5"
-                                : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
+                                ? `${m.bg} shadow-none translate-y-2 translate-x-2`
+                                : "bg-white shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] active:translate-y-2 active:translate-x-2 active:shadow-none"
                             }
             `}
                     >
                         <span
                             className={`
-              flex h-10 w-10 items-center justify-center rounded-lg text-lg
-              bg-gradient-to-br ${m.gradient}
-              ${isActive ? "opacity-100" : "opacity-60 group-hover:opacity-80"}
-              transition-opacity duration-300
+              flex h-12 w-12 shrink-0 items-center justify-center border-2 border-black bg-white text-2xl
+              shadow-[4px_4px_0_0_rgba(0,0,0,1)] text-black
             `}
                         >
                             {m.icon}
                         </span>
                         <div className="text-left">
-                            <p
-                                className={`text-sm font-semibold ${isActive ? "text-white" : "text-white/70"}`}
-                            >
+                            <p className="text-xl font-black uppercase text-black">
                                 {m.name}
                             </p>
-                            <p className="text-xs text-white/40">{m.description}</p>
+                            <p className="text-xs font-bold text-black/80 uppercase tracking-wider">{m.description}</p>
                         </div>
                     </button>
                 );

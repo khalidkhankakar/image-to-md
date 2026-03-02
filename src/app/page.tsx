@@ -44,34 +44,30 @@ export default function Home() {
   }, [image, model]);
 
   return (
-    <div className="min-h-screen bg-[#09090b]">
-      {/* Background gradient */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-violet-600/8 blur-[120px]" />
-        <div className="absolute top-1/3 -right-1/4 h-[600px] w-[600px] rounded-full bg-fuchsia-600/6 blur-[100px]" />
-      </div>
-
-      <main className="relative mx-auto max-w-2xl px-5 py-16">
+    <div className="min-h-screen bg-[#f4f4f0] text-black font-sans selection:bg-pink-300">
+      <main className="relative mx-auto max-w-3xl px-5 py-16">
         {/* Header */}
-        <header className="mb-12 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/60">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Powered by AI
+        <header className="mb-14 text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-black bg-yellow-300 px-5 py-2 text-sm font-bold text-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
+            <span className="h-3 w-3 rounded-full border border-black bg-green-500 animate-pulse" />
+            POWERED BY AI
           </div>
-          <h1 className="bg-gradient-to-b from-white to-white/60 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
-            Image to Markdown
+          <h1 className="text-5xl font-black uppercase tracking-tight text-black sm:text-7xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
+            Image to
+            <br />
+            <span className="bg-pink-400 px-4 text-white">Markdown</span>
           </h1>
-          <p className="mt-3 text-base text-white/40">
+          <p className="mt-8 text-lg font-bold text-black/80 uppercase">
             Upload an image and extract its text as clean, structured Markdown.
           </p>
         </header>
 
         {/* Steps */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-10">
           {/* Step 1: Upload */}
           <section>
-            <label className="mb-3 flex items-center gap-2 text-sm font-medium text-white/60">
-              <span className="flex h-5 w-5 items-center justify-center rounded-md bg-violet-500/20 text-xs text-violet-400">
+            <label className="mb-3 flex items-center gap-3 text-lg font-black uppercase text-black">
+              <span className="flex h-8 w-8 items-center justify-center border-2 border-black bg-pink-400 text-white shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
                 1
               </span>
               Upload Image
@@ -81,8 +77,8 @@ export default function Home() {
 
           {/* Step 2: Select Model */}
           <section>
-            <label className="mb-3 flex items-center gap-2 text-sm font-medium text-white/60">
-              <span className="flex h-5 w-5 items-center justify-center rounded-md bg-violet-500/20 text-xs text-violet-400">
+            <label className="mb-3 flex items-center gap-3 text-lg font-black uppercase text-black">
+              <span className="flex h-8 w-8 items-center justify-center border-2 border-black bg-cyan-400 text-black shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
                 2
               </span>
               Select Model
@@ -96,18 +92,18 @@ export default function Home() {
             onClick={handleExtract}
             disabled={!image || isLoading}
             className={`
-              group relative w-full overflow-hidden rounded-xl px-6 py-3.5 text-sm font-semibold
-              transition-all duration-300 ease-out
+              group relative w-full overflow-hidden border-4 border-black px-6 py-4 text-xl font-black uppercase tracking-wider
+              transition-all duration-200 ease-out
               ${!image || isLoading
-                ? "cursor-not-allowed bg-white/5 text-white/30"
-                : "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 hover:brightness-110 active:scale-[0.98]"
+                ? "cursor-not-allowed bg-gray-300 text-gray-500 shadow-none border-gray-400"
+                : "bg-green-400 text-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[12px_12px_0_0_rgba(0,0,0,1)] active:translate-y-2 active:translate-x-2 active:shadow-none"
               }
             `}
           >
             {isLoading ? (
-              <span className="flex items-center justify-center gap-2">
+              <span className="flex items-center justify-center gap-3">
                 <svg
-                  className="h-4 w-4 animate-spin"
+                  className="h-6 w-6 animate-spin"
                   viewBox="0 0 24 24"
                   fill="none"
                 >
@@ -125,7 +121,7 @@ export default function Home() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                   />
                 </svg>
-                Extracting...
+                EXTRACTING...
               </span>
             ) : (
               "Extract Markdown"
@@ -134,8 +130,8 @@ export default function Home() {
 
           {/* Step 3: Output */}
           <section>
-            <label className="mb-3 flex items-center gap-2 text-sm font-medium text-white/60">
-              <span className="flex h-5 w-5 items-center justify-center rounded-md bg-violet-500/20 text-xs text-violet-400">
+            <label className="mb-3 flex items-center gap-3 text-lg font-black uppercase text-black">
+              <span className="flex h-8 w-8 items-center justify-center border-2 border-black bg-yellow-400 text-black shadow-[2px_2px_0_0_rgba(0,0,0,1)]">
                 3
               </span>
               Output
